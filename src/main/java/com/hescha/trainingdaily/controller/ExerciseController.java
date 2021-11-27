@@ -1,6 +1,6 @@
 package com.hescha.trainingdaily.controller;
 
-import com.hescha.trainingdaily.model.Product;
+import com.hescha.trainingdaily.model.Exercise;
 import com.hescha.trainingdaily.service.CrudService;
 import com.hescha.trainingdaily.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-@RequestMapping("/products")
-public class ProductController extends AbstractController<Product> {
+@RequestMapping("/exercises")
+public class ExerciseController extends AbstractController<Exercise> {
 
-    private final static String pagePath = "products";
+    private final static String pagePath = "exercises";
 
     @Autowired
     private UserService userService;
 
-    public ProductController(CrudService<Product> service) {
-        super(service, ProductController.pagePath);
+    public ExerciseController(CrudService<Exercise> service) {
+        super(service, ExerciseController.pagePath);
     }
 
     @GetMapping
@@ -42,13 +43,13 @@ public class ProductController extends AbstractController<Product> {
     @RequestMapping(path = {"/edit", "/edit/{id}"}, method = GET)
     @Override
     public String editOrNewPage(Model model, Long id) {
-        Product entity = (id == null) ? new Product() : service.read(id);
+        Exercise entity = (id == null) ? new Exercise() : service.read(id);
         model.addAttribute("entity", entity);
         return pagePath + "-one";
     }
 
     @RequestMapping(path = "/create", method = POST)
-    public String createOrUpdate(Product e, Principal principal) {
+    public String createOrUpdate(Exercise e, Principal principal) {
         if (e.getAddedBy() == null) {
             e.setAddedBy(userService.findByUsername(principal.getName()));
             e = service.create(e);

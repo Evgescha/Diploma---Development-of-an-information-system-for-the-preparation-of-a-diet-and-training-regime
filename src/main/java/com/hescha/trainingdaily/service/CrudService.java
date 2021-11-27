@@ -1,12 +1,17 @@
 package com.hescha.trainingdaily.service;
 
-public interface CrudService<Entity> {
+import java.util.List;
 
-	void create(Entity entity) throws Exception;
+public interface CrudService<E> {
 
-	Entity read(long id);
+	E create(E E);
 
-	void update(Entity entity) throws Exception;
+	E read(long id);
 
-	void delete(long id) throws Exception;
+	E update(E e);
+
+	void delete(long id);
+
+	List<E> findAll();
+	
 }

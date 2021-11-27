@@ -4,36 +4,40 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public class CrudImpl<Entity> implements CrudService<Entity> {
+public class CrudImpl<E> implements CrudService<E> {
 
-    public JpaRepository<Entity, Long> repository;
+    public JpaRepository<E, Long> repository;
 
     @Override
-    public void create(Entity entity) throws Exception {
-        repository.saveAndFlush(entity);
+    public E create(E e) {
+        return repository.saveAndFlush(e);
     }
 
     @Override
-    public Entity read(long id) {
+    public E read(long id) {
         return repository.findById(id).isPresent() ? repository.findById(id).get() : null;
     }
 
     @Override
-    public void update(Entity entity) throws Exception {
-        repository.saveAndFlush(entity);
+    public E update(E E) {
+        return repository.saveAndFlush(E);
     }
 
     @Override
-    public void delete(long id) throws Exception {
+    public void delete(long id) {
         repository.deleteById(id);
     }
 
-    public CrudImpl(JpaRepository<Entity, Long> repository) {
-        super();
+    public CrudImpl(JpaRepository<E, Long> repository) {
         this.repository = repository;
     }
 
-    public List<Entity> getAll() {
+    public List<E> getAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public List<E> findAll() {
         return repository.findAll();
     }
 }

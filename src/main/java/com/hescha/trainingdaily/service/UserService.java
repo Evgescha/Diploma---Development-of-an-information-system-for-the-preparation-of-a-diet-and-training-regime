@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl extends CrudImpl<User> {
+public class UserService extends CrudImpl<User> {
 
     private final static String DEFAULT_ROLE = "ROLE_USER";
     private final static String ROLE_ADMIN = "ROLE_ADMIN";
@@ -18,7 +18,7 @@ public class UserServiceImpl extends CrudImpl<User> {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository repository, RoleService roleService, PasswordEncoder passwordEncoder) {
         super(repository);
         this.repository = repository;
         this.roleService = roleService;

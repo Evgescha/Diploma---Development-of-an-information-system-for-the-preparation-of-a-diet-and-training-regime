@@ -1,6 +1,6 @@
 package com.hescha.trainingdaily.config;
 
-import com.hescha.trainingdaily.service.UserDetailsServiceImpl;
+import com.hescha.trainingdaily.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
     @Autowired
     private ApplicationContext context;
 

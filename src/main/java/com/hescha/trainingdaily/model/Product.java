@@ -8,7 +8,13 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Data
-public class Product extends AbstractFood {
+public class Product extends AbstractEntity {
+    protected String name;
+    protected String image;
+    protected String description;
+    protected int kkalIn100gr;
+    protected float kkalIn1gr;
+    protected boolean approved;
 
     @ManyToOne
     @JoinColumn(name = "addedBy_id")

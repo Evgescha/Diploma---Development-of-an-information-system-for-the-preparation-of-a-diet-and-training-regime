@@ -10,10 +10,10 @@ import javax.persistence.ManyToOne;
 @Data
 public class Exercise extends AbstractEntity {
     private String name;
+    private String description;
     private int kkalInHour;
-    private int kkalInMinute;
+    private float kkalInMinute;
     private boolean approved;
-    private boolean deleted;
 
     @ManyToOne
     @JoinColumn(name = "addedBy_id")

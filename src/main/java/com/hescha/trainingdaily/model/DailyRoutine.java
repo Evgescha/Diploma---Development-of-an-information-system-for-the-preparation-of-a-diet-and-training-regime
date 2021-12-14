@@ -28,12 +28,12 @@ public class DailyRoutine extends AbstractEntity implements Comparable<DailyRout
     @OneToMany(mappedBy = "dailyRoutine", fetch = FetchType.LAZY)
     private Set<MealForDay> mealForDays = new TreeSet<>();
 
-    public int getAllExercisesKkal() {
-        int kkal = exercises.entrySet()
+    public float getAllExercisesKkal() {
+        double kkal = exercises.entrySet()
                 .stream()
-                .mapToInt(exercise -> exercise.getKey().getKkalInMinute() * exercise.getValue().intValue())
+                .mapToDouble(exercise -> exercise.getKey().getKkalInMinute() * exercise.getValue().intValue())
                 .sum();
-        return kkal;
+        return (float)kkal;
     }
 
     @Override

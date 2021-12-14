@@ -9,8 +9,8 @@ import javax.persistence.MappedSuperclass;
 public abstract class AbstractFood extends AbstractEntity {
     protected String name;
     protected String image;
+    protected String description;
     protected int kkalIn100gr;
-    protected int kkalIn1gr;
+    protected float kkalIn1gr;
     protected boolean approved;
-    protected boolean deleted;
 }

@@ -30,17 +30,17 @@ public class MealForDay extends AbstractEntity {
     @MapKeyColumn(name = "Meal")
     private Map<Meal, Integer> meals = new HashMap<>();
 
-    public int getAllKkalInTime() {
-        int kkalFromProducts = products.entrySet()
+    public float getAllKkalInTime() {
+        double kkalFromProducts = products.entrySet()
                 .stream()
-                .mapToInt(food -> food.getKey().getKkalIn1gr() * food.getValue().intValue())
+                .mapToDouble(food -> food.getKey().getKkalIn1gr() * food.getValue().intValue())
                 .sum();
 
-        int kkalFromMeals = meals.entrySet()
+        double kkalFromMeals = meals.entrySet()
                 .stream()
-                .mapToInt(food -> food.getKey().getKkalIn1gr() * food.getValue().intValue())
+                .mapToDouble(food -> food.getKey().getKkalIn1gr() * food.getValue().intValue())
                 .sum();
 
-        return kkalFromProducts + kkalFromMeals;
+        return (float)(kkalFromProducts + kkalFromMeals);
     }
 }

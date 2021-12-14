@@ -24,7 +24,7 @@ public abstract class AbstractController<E extends AbstractEntity> {
 
     public String delete(@PathVariable("id") Long id) {
         service.delete(id);
-        return pagePath;
+        return "redirect:/" + pagePath;
     }
 
     public String createOrUpdate(E e) {

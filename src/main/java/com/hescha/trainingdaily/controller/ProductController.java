@@ -1,5 +1,6 @@
 package com.hescha.trainingdaily.controller;
 
+import com.hescha.trainingdaily.model.Exercise;
 import com.hescha.trainingdaily.model.Product;
 import com.hescha.trainingdaily.service.CrudService;
 import com.hescha.trainingdaily.service.UserService;
@@ -41,20 +42,37 @@ public class ProductController extends AbstractController<Product> {
 
     @RequestMapping(path = {"/edit", "/edit/{id}"}, method = GET)
     @Override
-    public String editOrNewPage(Model model, Long id) {
+    public String editOrNewPage(Model model,  @PathVariable(value = "id", required = false) Long id) {
         Product entity = (id == null) ? new Product() : service.read(id);
         model.addAttribute("entity", entity);
         return pagePath + "-one";
     }
 
+    @RequestMapping(path = "/approve/{id}", method = GET)
+    public String approve(@PathVariable(value = "id", required = false) Long id) {
+        Product read = service.read(id);
+        read.setApproved(true);
+        service.update(read);
+        return "redirect:/" + pagePath;
+    }
+
     @RequestMapping(path = "/create", method = POST)
     public String createOrUpdate(Product e, Principal principal) {
-        if (e.getAddedBy() == null) {
+        if (e.getId() == null) {
+            int kkalIn1 = e.getKkalIn100gr()/100;
+            e.setKkalIn1gr(kkalIn1);
             e.setAddedBy(userService.findByUsername(principal.getName()));
-            e = service.create(e);
+            service.create(e);
         } else {
-            e = service.update(e);
+            Product inBase = service.read(e.getId());
+            inBase.setImage(e.getImage());
+            inBase.setName(e.getName());
+            inBase.setDescription(e.getDescription());
+            inBase.setKkalIn100gr(e.getKkalIn100gr());
+            int kkalIn1 = e.getKkalIn100gr()/100;
+            e.setKkalIn1gr(kkalIn1);
+            service.update(inBase);
         }
-        return "redirect:/" + pagePath + "/" + e.getId();
+        return "redirect:/" + pagePath;
     }
 }

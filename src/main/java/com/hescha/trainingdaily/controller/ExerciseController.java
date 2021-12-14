@@ -42,20 +42,36 @@ public class ExerciseController extends AbstractController<Exercise> {
 
     @RequestMapping(path = {"/edit", "/edit/{id}"}, method = GET)
     @Override
-    public String editOrNewPage(Model model, Long id) {
+    public String editOrNewPage(Model model, @PathVariable(value = "id", required = false) Long id) {
         Exercise entity = (id == null) ? new Exercise() : service.read(id);
         model.addAttribute("entity", entity);
         return pagePath + "-one";
     }
 
+    @RequestMapping(path = "/approve/{id}", method = GET)
+    public String approveActivity(@PathVariable(value = "id", required = false) Long id) {
+        Exercise read = service.read(id);
+        read.setApproved(true);
+        service.update(read);
+        return "redirect:/" + pagePath;
+    }
+
     @RequestMapping(path = "/create", method = POST)
     public String createOrUpdate(Exercise e, Principal principal) {
-        if (e.getAddedBy() == null) {
+        if (e.getId() == null) {
+            int kkalInMinute = e.getKkalInHour()/60;
+            e.setKkalInMinute(kkalInMinute);
             e.setAddedBy(userService.findByUsername(principal.getName()));
-            e = service.create(e);
+            service.create(e);
         } else {
-            e = service.update(e);
+            Exercise inBase = service.read(e.getId());
+            inBase.setName(e.getName());
+            inBase.setDescription(e.getDescription());
+            inBase.setKkalInHour(e.getKkalInHour());
+            int kkalInMinute = e.getKkalInHour()/60;
+            inBase.setKkalInMinute(kkalInMinute);
+            service.update(inBase);
         }
-        return "redirect:/" + pagePath + "/" + e.getId();
+        return "redirect:/" + pagePath;
     }
 }

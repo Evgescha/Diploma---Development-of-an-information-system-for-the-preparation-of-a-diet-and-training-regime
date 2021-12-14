@@ -81,6 +81,6 @@ public class MealController extends AbstractController<Meal> {
 
         e.setFoods(myProducts);
 
-        return "redirect:/" + pagePath + "/" + e.getId();
+        return "redirect:/" + pagePath;
     }
 }

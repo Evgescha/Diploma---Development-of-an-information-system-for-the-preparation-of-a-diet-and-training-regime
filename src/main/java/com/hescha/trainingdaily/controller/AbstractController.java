@@ -29,6 +29,6 @@ public abstract class AbstractController<E extends AbstractEntity> {
 
     public String createOrUpdate(E e) {
         E created = service.create(e);
-        return "redirect:/" + pagePath + "/" + created.getId();
+        return "redirect:/" + pagePath;
     }
 }

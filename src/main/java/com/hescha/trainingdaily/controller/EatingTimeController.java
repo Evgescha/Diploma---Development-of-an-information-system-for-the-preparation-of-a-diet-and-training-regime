@@ -39,7 +39,7 @@ public class EatingTimeController extends AbstractController<EatingTime> {
 
     @RequestMapping(path = {"/edit", "/edit/{id}"}, method = GET)
     @Override
-    public String editOrNewPage(Model model, Long id) {
+    public String editOrNewPage(Model model,@PathVariable(value = "id", required = false)  Long id) {
         EatingTime entity = (id == null) ? new EatingTime() : service.read(id);
         model.addAttribute("entity", entity);
         return pagePath + "-one";

@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Время кушать</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+
+<body>
+
+<div th:replace="~{commons :: nav}"></div>
+
+<div th:replace="~{commons :: banner_area}"></div>
+
+
+<section class="list">
+    <div class="container my-2">
+        <div class="card">
+            <div class="row">
+                <div class="card-body col">
+                    <h4 class="text-center" style="color:black">Времена приема пищи</h4>
+                    <div th:switch="${list}" class="container my-5">
+                        <div class="col-md-12">
+                            <h2 th:case="null"> Записей не найдено </h2>
+                            <div th:case="*" class="overScroll">
+                                <table class="table table-striped table-responsive-md">
+                                    <thead>
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Очередность</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="entity : ${list}">
+                                        <td th:text="${entity.name}"></td>
+                                        <td th:text="${entity.numberInDay}"></td>
+                                        <td class="btnInTable widthLastCol">
+                                            <a th:href="@{/eatingTimes/edit/{id}(id=${entity.id})}" class="btn btn-primary">
+                                                Редактировать
+                                            </a>
+                                        </td>
+                                        <td class="btnInTable widthLastCol">
+                                            <a th:href="@{/eatingTimes/delete/{id}(id=${entity.id})}" class="btn btn-danger">
+                                                Удалить
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="d-flex justify-content-end">
+                                <a href="/eatingTimes/edit" class="btn btn-primary mx-2">
+                                    Добавить запись</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{commons :: footer}"></div>
+</body>
+
+</html>

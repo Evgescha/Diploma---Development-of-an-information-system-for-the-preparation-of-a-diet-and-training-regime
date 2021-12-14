@@ -13,8 +13,10 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
-        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/");
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
     }
 
     @Override

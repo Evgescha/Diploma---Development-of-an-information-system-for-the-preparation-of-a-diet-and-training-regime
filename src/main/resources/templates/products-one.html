@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Добавить/Редактировать</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+<body>
+
+<div th:replace="~{commons :: nav}"></div>
+
+<div th:replace="~{commons :: banner_area}"></div>
+
+
+<section class="edit">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center black">Продукт</h4>
+                <form th:action="@{/products/create}" th:object="${entity}" method="post" class="register">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th><label class="mx-2">Название</label></th>
+                            <td><input type="text" th:field="*{name}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Ссылка на картинку</label></th>
+                            <td><input type="text" th:field="*{image}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Краткое описание</label></th>
+                            <td><input type="text" th:field="*{description}" class="form-control"/></td>
+                        </tr>
+
+                        <tr>
+                            <th><label class="mx-2">Ккал на 100 гр</label></th>
+                            <td><input type="number" th:field="*{kkalIn100gr}" class="form-control" required min="1"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p class="my-5 justify-content-between d-flex">
+                        <input type="hidden" id="id" th:field="*{id}">
+                        <input type="button" class="btn btn-primary" value=" Назад " onclick="history.back()"/>
+                        <input type="submit" class="btn btn-primary" value=" Отправить ">
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{commons :: footer}"></div>
+</body>
+</html>

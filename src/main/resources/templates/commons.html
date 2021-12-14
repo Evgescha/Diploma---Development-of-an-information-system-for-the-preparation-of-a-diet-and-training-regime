@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta th:fragment="head">
+        <!-- Required Meta Tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/images/logo/favicon.png" type="image/x-icon">
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="/css/animate-3.7.0.css">
+        <link rel="stylesheet" href="/css/font-awesome-4.7.0.min.css">
+        <link rel="stylesheet" href="/fonts/flat-icon/flaticon.css">
+        <link rel="stylesheet" href="/css/bootstrap-4.1.3.min.css">
+        <link rel="stylesheet" href="/css/owl-carousel.min.css">
+        <link rel="stylesheet" href="/css/nice-select.css">
+        <link rel="stylesheet" href="/css/style.css">
+    </meta>
+</head>
+
+<body>
+<header id="header" class="header-area main-header" th:fragment="nav">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="logo-area">
+                    <a href="index.html"><img src="/images/logo.png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="custom-navbar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="main-menu">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/schedules" th:if="${#request.userPrincipal !=null && #request.isUserInRole('ROLE_USER')}">Мое расписание</a></li>
+                        <li><a href="/products" th:if="${#request.userPrincipal}">Продукты</a></li>
+                        <li><a href="/exercises" th:if="${#request.userPrincipal !=null}">Активности</a></li>
+
+                        <li><a href="/users" th:if="${#request.userPrincipal !=null && #request.isUserInRole('ROLE_ADMIN')}">Пользователи</a></li>
+
+                        <li class="menu-btn" th:if="${#request.userPrincipal == null}">
+                            <a href="/login" class="template-btn">Присоединиться</a>
+                        </li>
+
+                        <li><a href="/logout" th:if="${#request.userPrincipal !=null}">Выйти</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<section class="banner-area banner-bg about-page text-center" th:fragment="banner_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="banner-text">
+                    <h3>Здоровым быть = за питанием следить</h3>
+                    <a href="/login" th:if="${#request.userPrincipal == null}">Присоединиться</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="friend-area section-padding text-center" th:fragment="friend_area-starts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Присоединяйся к нам!</h3>
+                <h4 class="pt-3 pb-4">Составляй свое расписание и следуй ему. <br>Отслеживай все изменения.</h4>
+                <a href="/login" class="template-btn">Присоединиться</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer-section" th:fragment="footer">
+    <div class="footer-widget">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="single-widget-home mb-5 mb-lg-0">
+                        <h5 class="mb-4">О нас</h5>
+                        <p>
+                            Мы представляем собой платформу, которая поможет вам отслеживать количество потребляемых и потраченных калорий в течении каждого дня! И помните, все начинается с малого)
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="single-widget-home mb-5 mb-lg-0">
+                        <h5 class="mb-4">Связь с нами</h5>
+                        <p>При возникновении неполадок в работе сайта, обращайтесь в наши социальные сети или по номерам телефона</p>
+                        <span class="span-style">8-800-555-35-35</span>
+                        <span class="span-style">1-234-567-89-00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-6">
+                    <span>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        Cделано с любовью
+                    </span>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="facebook.com"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="twitter.com"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript -->
+    <script src="/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="/js/vendor/bootstrap-4.1.3.min.js"></script>
+    <script src="/js/vendor/wow.min.js"></script>
+    <script src="/js/vendor/owl-carousel.min.js"></script>
+    <script src="/js/vendor/jquery.nice-select.min.js"></script>
+    <script src="/js/vendor/gmaps.min.js"></script>
+    <script src="/js/main.js"></script>
+
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+</script>
+
+</footer>
+<!-- Footer Area End -->
+
+
+</body>
+
+</html>

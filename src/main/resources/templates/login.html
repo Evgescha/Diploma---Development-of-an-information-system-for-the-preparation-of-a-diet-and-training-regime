@@ -1,0 +1,104 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Вход в систему</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+
+<body>
+
+<div th:replace="~{commons :: nav}"></div>
+
+<div th:replace="~{commons :: banner_area}"></div>
+
+<section class="contact-form section-padding3">
+    <div class="container">
+        <div class="row mainMessage">
+            <h3 class="heading text-center">Войдите для полного доступа</h3>
+            <br>
+            <h3 th:if="${success}" class="text-center" th:text="${success}">
+                Ошибка регистрации. Проверьте уникальность имени и попробуйте еще раз
+            </h3>
+            <h3 th:if="${#request.getParameter('error') != null and #request.getParameter('error') == 'true'}" class="text-center">
+                Ошибка входа. Проверьте правильно ли введен логин и пароль
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="heading text-center">Я уже регистрировался</h3>
+                <form action="/login" method="post">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Введите Логин</label>
+                                <input type="text" name="username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Введите пароль</label>
+                                <input type="password" name="password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix space20"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="form-control">Вход</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <h3 class="heading text-center">Я новый пользователь</h3>
+                <form action="/registration" method="post">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Введите ФИО</label>
+                                <input type="text" name="fio" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Дату рождения</label>
+                                <input type="date" name="dateBorn" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Введите адрес электронной почты</label>
+                                <input type="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Введите логин</label>
+                                <input type="text" name="username" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix space20"></div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Пароль</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="form-control">Регистрация</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{commons :: footer}"></div>
+</body>
+
+</html>

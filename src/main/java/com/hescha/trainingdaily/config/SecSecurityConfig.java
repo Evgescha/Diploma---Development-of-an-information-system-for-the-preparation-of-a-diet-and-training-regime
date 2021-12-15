@@ -46,8 +46,8 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         
         http.authorizeRequests()
         .antMatchers("/admin/**").hasRole("ADMIN")
-        .antMatchers( "/registration","/login","/j _spring_security_check").anonymous()
-        .antMatchers("/**", "/css/**","/js/**","/img/**","/j _spring_security_check","/contact").permitAll()
+        .antMatchers( "/registration", "/login").anonymous()
+        .antMatchers("/assets/**", "/js/**", "/images/**", "/fonts/**", "/css/**", "/").permitAll()
         .anyRequest().authenticated().and()
         .formLogin().loginPage("/login")
 	        .loginProcessingUrl("/login")

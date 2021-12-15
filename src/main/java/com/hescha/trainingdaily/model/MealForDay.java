@@ -1,6 +1,7 @@
 package com.hescha.trainingdaily.model;
 
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 @Entity
 @Data
-public class MealForDay extends AbstractEntity {
+public class MealForDay extends AbstractEntity implements Comparable<MealForDay> {
     @ManyToOne
     @JoinColumn(name = "eatingTime_id")
     private EatingTime time;
@@ -32,6 +33,11 @@ public class MealForDay extends AbstractEntity {
                 .mapToDouble(food -> food.getKey().getKkalIn1gr() * food.getValue().intValue())
                 .sum();
 
-        return (float)(kkalFromProducts);
+        return (float) (kkalFromProducts);
+    }
+
+    @Override
+    public int compareTo(@NotNull MealForDay o) {
+        return time.compareTo(o.getTime());
     }
 }

@@ -49,7 +49,7 @@ public class ExerciseController extends AbstractController<Exercise> {
     }
 
     @RequestMapping(path = "/approve/{id}", method = GET)
-    public String approveActivity(@PathVariable(value = "id", required = false) Long id) {
+    public String approveActivity(@PathVariable(value = "id") Long id) {
         Exercise read = service.read(id);
         read.setApproved(true);
         service.update(read);

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Schedule</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+<body>
+<!-- Header Area Starts -->
+<div th:replace="~{commons :: nav}"></div>
+<!-- Header Area End -->
+
+<!-- Banner Area Starts -->
+<div th:replace="~{commons :: banner_area}"></div>
+<!-- Banner Area End -->
+
+<!-- Schedule Area Starts -->
+<section class="schedule-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-top text-center">
+                    <h3 th:text="'расписание на '+${date}">schedule your fitness process</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" th:if="${entity == null}">
+            <div class="col-lg-12">
+                <div class="section-top text-center">
+                    <h4>На выбранную дату расписания нет</h4>
+                    <a th:href="'/daily/create/'+${date}">Создать</a>
+                </div>
+            </div>
+        </div>
+
+        <div th:each="time : ${times}" th:if="${entity != null}">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-top text-center">
+                        <h5 th:text="${time}">Time name</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="table-wrap col-lg-10">
+                    <table class="schdule-table table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th class="head" scope="col">Картинка</th>
+                            <th class="head" scope="col">Продукт</th>
+                            <th class="head" scope="col">Грамм</th>
+                            <th class="head" scope="col">Ккал</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="dailyMeal : ${entity.mealForDays}" th:if="${dailyMeal.time.name = time.name}">
+                        <tr th:each="mapItem:${dailyMeal.products}">
+                            <th class="name" scope="row"><img th:src="${mapItem.key.image}"></th>
+                            <td th:text="${mapItem.key.name}">02.00</td>
+                            <td th:text="${mapItem.value}">10.00</td>
+                            <td th:text="${mapItem.key.kkalIn1gr * mapItem.value}">02.00</td>
+                        </tr>
+                        <tr>
+                            <th class="name" scope="row">Итого</th>
+                            <td>Получено</td>
+                            <td th:text="${dailyMeal.getAllKkalInTime()}">10.00</td>
+                            <td>Ккал</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br><br><br>
+
+        </div>
+
+
+        <div th:if="${entity != null}">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-top text-center">
+                        <h5>Активность</h5>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row justify-content-center">
+                <div class="table-wrap col-lg-10">
+                    <table class="schdule-table table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th class="head" scope="col">Активность</th>
+                            <th class="head" scope="col">Минут</th>
+                            <th class="head" scope="col">Потеряно ккал</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="exercise : ${entity.exercises}">
+                            <td th:text="${exercise.key.name}">02.00</td>
+                            <td th:text="${exercise.value}">10.00</td>
+                            <td th:text="${exercise.key.kkalInMinute * mapItem.value}">02.00</td>
+                        </tr>
+                        <tr>
+                            <th class="name" scope="row">Итого Потеряно</th>
+                            <td th:text="${entity.getAllExercisesKkal()}">10.00</td>
+                            <td>Ккал</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Schedule Area End -->
+
+<!-- Friend Area Starts -->
+<div th:replace="~{commons :: friend_area-starts}"></div>
+<!-- Friend Area End -->
+
+<!-- Footer Area Starts -->
+<div th:replace="~{commons :: footer}"></div>
+
+</body>
+</html>

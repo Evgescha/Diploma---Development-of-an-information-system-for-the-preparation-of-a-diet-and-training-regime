@@ -38,12 +38,10 @@
                 <div class="main-menu">
                     <ul>
                         <li><a href="/">Главная</a></li>
-                        <li><a href="/schedules"
-                               th:if="${#request.userPrincipal !=null && #request.isUserInRole('ROLE_USER')}">Мое
-                            расписание</a></li>
+                        <li><a href="/daily/get" th:if="${#request.userPrincipal !=null}">Расписание</a></li>
 
-                        <li><a href="/products" th:if="${#request.userPrincipal}">Продукты</a></li>
-                        <li><a href="/exercises" th:if="${#request.userPrincipal !=null}">Активности</a></li>
+                        <li><a href="/products" th:if="${#request.userPrincipal != null}">Продукты</a></li>
+                        <li><a href="/exercises" th:if="${#request.userPrincipal != null}">Активности</a></li>
 
                         <li><a href="/users"
                                th:if="${#request.userPrincipal !=null && #request.isUserInRole('ROLE_ADMIN')}">Пользователи</a>
@@ -84,7 +82,7 @@
             <div class="col-lg-12">
                 <h3>Присоединяйся к нам!</h3>
                 <h4 class="pt-3 pb-4">Составляй свое расписание и следуй ему. <br>Отслеживай все изменения.</h4>
-                <a href="/login" class="template-btn">Присоединиться</a>
+                <a href="/login" class="template-btn" th:if="${#request.userPrincipal == null}">Присоединиться</a>
             </div>
         </div>
     </div>

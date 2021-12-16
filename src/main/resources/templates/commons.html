@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-lg-2">
                 <div class="logo-area">
-                    <a href="index.html"><img src="/images/logo.png" alt="logo"></a>
+                    <a href="/"><img src="/images/logo.png" alt="logo"></a>
                 </div>
             </div>
             <div class="col-lg-10">
@@ -38,7 +38,7 @@
                 <div class="main-menu">
                     <ul>
                         <li><a href="/">Главная</a></li>
-                        <li><a href="/daily/get" th:if="${#request.userPrincipal !=null}">Расписание</a></li>
+                        <li><a href="/daily" th:if="${#request.userPrincipal !=null}">Расписание</a></li>
 
                         <li><a href="/products" th:if="${#request.userPrincipal != null}">Продукты</a></li>
                         <li><a href="/exercises" th:if="${#request.userPrincipal != null}">Активности</a></li>

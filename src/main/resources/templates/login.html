@@ -19,9 +19,11 @@
             <h3 th:if="${success}" class="text-center" th:text="${success}">
                 Ошибка регистрации. Проверьте уникальность имени и попробуйте еще раз
             </h3>
+            <br>
             <h3 th:if="${#request.getParameter('error') != null and #request.getParameter('error') == 'true'}" class="text-center">
                 Ошибка входа. Проверьте правильно ли введен логин и пароль
             </h3>
+            <br>
         </div>
         <div class="row">
             <div class="col-lg-6">

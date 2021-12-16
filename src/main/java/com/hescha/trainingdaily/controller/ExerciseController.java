@@ -59,7 +59,7 @@ public class ExerciseController extends AbstractController<Exercise> {
     @RequestMapping(path = "/create", method = POST)
     public String createOrUpdate(Exercise e, Principal principal) {
         if (e.getId() == null) {
-            int kkalInMinute = e.getKkalInHour()/60;
+            float kkalInMinute = e.getKkalInHour()/60;
             e.setKkalInMinute(kkalInMinute);
             e.setAddedBy(userService.findByUsername(principal.getName()));
             service.create(e);
@@ -68,7 +68,7 @@ public class ExerciseController extends AbstractController<Exercise> {
             inBase.setName(e.getName());
             inBase.setDescription(e.getDescription());
             inBase.setKkalInHour(e.getKkalInHour());
-            int kkalInMinute = e.getKkalInHour()/60;
+            float kkalInMinute = e.getKkalInHour()/60;
             inBase.setKkalInMinute(kkalInMinute);
             service.update(inBase);
         }

@@ -59,7 +59,7 @@ public class ProductController extends AbstractController<Product> {
     @RequestMapping(path = "/create", method = POST)
     public String createOrUpdate(Product e, Principal principal) {
         if (e.getId() == null) {
-            int kkalIn1 = e.getKkalIn100gr()/100;
+            float kkalIn1 = e.getKkalIn100gr()/100;
             e.setKkalIn1gr(kkalIn1);
             e.setAddedBy(userService.findByUsername(principal.getName()));
             service.create(e);
@@ -69,7 +69,7 @@ public class ProductController extends AbstractController<Product> {
             inBase.setName(e.getName());
             inBase.setDescription(e.getDescription());
             inBase.setKkalIn100gr(e.getKkalIn100gr());
-            int kkalIn1 = e.getKkalIn100gr()/100;
+            float kkalIn1 = e.getKkalIn100gr()/100;
             e.setKkalIn1gr(kkalIn1);
             service.update(inBase);
         }

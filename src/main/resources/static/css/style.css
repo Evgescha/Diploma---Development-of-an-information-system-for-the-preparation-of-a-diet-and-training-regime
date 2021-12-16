@@ -3396,3 +3396,10 @@ table{
     width: 150px;
     height: auto;
 }
+
+input#myInput { width: 220px; }
+table#myTable { width: 100%; }
+table#myTable th { text-align: left; padding: 20px 0 10px; }
+table#myTable {
+    max-height: 400px;
+}

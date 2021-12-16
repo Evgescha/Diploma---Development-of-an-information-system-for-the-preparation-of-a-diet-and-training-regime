@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Добавить продукт</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+<body>
+
+<div th:replace="~{commons :: nav}"></div>
+
+<div th:replace="~{commons :: banner_area}"></div>
+
+
+<section class="edit">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center black my-5" th:text="'Добавление продукта в период: ' +${eatingTime.name}" ></h4>
+                <form th:action="@{/daily/addProduct}" method="post" class="register">
+                    <input type="number" th:value="${eatingTime.id}" name="time" required hidden>
+                    <input type="number" th:value="${dailyId}" name="daily" required hidden>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th><label class="mx-2">Выберите продукт для добавления</label></th>
+                            <td>
+                                <input
+                                        type="text"
+                                        id="myInput"
+                                        onkeyup="myFunction()"
+                                        placeholder="Поиск.."
+                                        title="Введите часть названия">
+                                <table class="table table-striped table-responsive-md" id="myTable">
+                                    <thead>
+                                    <tr class="header">
+                                        <th>Картинка</th>
+                                        <th>Название</th>
+                                        <th>Описание</th>
+                                        <th>Ккал в 100 гр</th>
+                                        <th>Выбран</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="entity : ${products}"
+                                        th:if="${entity.approved == true}">
+                                        <td>
+                                            <img th:src="${entity.image}" class="entityImage">
+                                        </td>
+                                        <td th:text="${entity.name}"></td>
+                                        <td th:text="${entity.description}"></td>
+                                        <td th:text="${entity.kkalIn100gr}"></td>
+                                        <td><input type="radio" name="product" th:value="${entity.id}" checked required></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Введите кодичество в граммах</label></th>
+                            <td><input type="number" name="count" class="form-control" required min="1" step="1"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p class="my-5 justify-content-between d-flex">
+                        <input type="button" class="btn btn-primary" value=" Назад " onclick="history.back()"/>
+                        <input type="submit" class="btn btn-primary" value=" Отправить ">
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--table filter-->
+<script>
+    const myFunction = () => {
+  const trs = document.querySelectorAll('#myTable tr:not(.header)')
+  const filter = document.querySelector('#myInput').value
+  const regex = new RegExp(filter, 'i')
+  const isFoundInTds = td => regex.test(td.innerHTML)
+  const isFound = childrenArr => childrenArr.some(isFoundInTds)
+  const setTrStyleDisplay = ({ style, children }) => {
+    style.display = isFound([
+      ...children // <-- All columns
+    ]) ? '' : 'none'
+  }
+  trs.forEach(setTrStyleDisplay)
+}
+
+
+</script>
+
+<div th:replace="~{commons :: footer}"></div>
+</body>
+</html>

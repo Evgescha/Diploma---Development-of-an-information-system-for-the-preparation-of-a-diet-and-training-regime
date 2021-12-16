@@ -98,7 +98,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="entity : ${list}" >
+                                <tr th:each="entity : ${list}" th:if="${#request.userPrincipal.name == entity.addedBy.username}">
                                     <td>
                                         <img th:src="${entity.image}" class="entityImage">
                                     </td>

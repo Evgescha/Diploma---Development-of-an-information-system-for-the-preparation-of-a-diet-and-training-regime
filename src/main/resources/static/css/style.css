@@ -3403,3 +3403,14 @@ table#myTable th { text-align: left; padding: 20px 0 10px; }
 table#myTable {
     max-height: 400px;
 }
+.myResult{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.myResult div{
+    display: flex;
+    justify-content: space-between;
+    width: 100%!important;
+}

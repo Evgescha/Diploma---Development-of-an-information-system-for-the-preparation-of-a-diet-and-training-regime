@@ -45,21 +45,33 @@
 			e.preventDefault();
 			var weight = $("[name='weight']").val();
 			var height = $("[name='height']").val();
+			var age = $("[name='age']").val();
+			var gender = $("[name='gender']:checked").val();
+			var active = $("[name='activn']").val();
 			if (weight > 0 && height > 0) {
-				var finalBmi = (weight / (height * height)) * 703;
+				var finalBmi = (weight / ((height * height) / 10000));
 				$("#dopeBMI").val(finalBmi);
 				if (finalBmi < 18.5) {
-					$("#meaning").val("You are underweight.");
+					$("#meaning").val("Недостаточная (дефицит) масса тела");
 				}
 				if (finalBmi > 18.5 && finalBmi < 24.9) {
-					$("#meaning").val("You are normal.");
+					$("#meaning").val("Норма");
 				}
 				if (finalBmi > 24.9 && finalBmi < 29.99) {
-					$("#meaning").val("You are overweight.");
+					$("#meaning").val("Избыточная масса тела (предожирение)");
 				}
 			} else {
-				$("#meaning").val("You are obese.");
-				}   
+				$("#meaning").val("Ожирение");
+				}
+				var norm = -1;
+				if(gender==0){
+				norm = (66.5 + 13.75 * weight + 5.003 * height - 6.775 * age) * active;
+                $("#norm").val(norm);
+				}
+				else{
+                norm= (655.1 + 9.563 * weight + 1.85 * height - 4.676 * age) * active;
+                $("#norm").val(norm);
+				}
 		});
 
         // Google Map

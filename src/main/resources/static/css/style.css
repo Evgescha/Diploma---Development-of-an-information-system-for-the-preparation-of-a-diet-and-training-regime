@@ -3358,6 +3358,7 @@ body > section.service-area.section-padding p{
 .mainMessage{
     justify-content:center;
     margin: 20px 0;
+	flex-direction: column;
 }
 .black{
     color:black!Important;
